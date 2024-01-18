@@ -1,0 +1,106 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.table {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 2px;
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+#searchInputTitle,
+#searchInputAuthor,
+#filterSubjects,
+#filterStatus {
+    width: calc(50% - 10px);
+    /* Two inputs in one line, with 10px margin in between */
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Alternating row colors */
+.table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect on rows */
+.table tbody tr:hover {
+    background-color: #dfe9f4;
+}
+
+/* Input focus styling */
+#searchInputTitle:focus,
+#searchInputAuthor:focus,
+#filterSubjects:focus,
+#filterStatus:focus {
+    outline: none;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Button styling */
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #searchInputTitle,
+    #searchInputAuthor,
+    #filterSubjects,
+    #filterStatus {
+        width: 100%;
+        /* Full width for small screens */
+    }
+}
+
+
+/* Footer styles */
+footer {
+    background-color: #f8f9fa;
+    padding: 10px;
+    position: relative;
+}

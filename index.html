@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Catalog</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container mt-4">
+        <div class="full-width text-center mb-4">
+            <h1>Library Catalog</h1>
+        </div>
+
+        <input type="text" id="searchInputTitle" class="form-control mb-3" placeholder="Search by title...">
+        <input type="text" id="searchInputAuthor" class="form-control mb-3" placeholder="Search by author...">
+        <select id="filterSubjects" class="form-control mb-3">
+            <option value="">Filter by subjects...</option>
+        </select>
+        <select id="filterStatus" class="form-control mb-3">
+            <option value="">Filter by status...</option>
+        </select>
+
+        <table id="data-table" class="table table-striped">
+            <!-- script -->
+        </table>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center fixed-bottom">
+        &copy; 2024 Club Library Catalog. All rights reserved.
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
