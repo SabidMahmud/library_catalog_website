@@ -48,22 +48,23 @@ async function renderTable() {
     // Search functionality for title on input
     searchInputTitle.addEventListener('input', () => {
         const searchTermTitle = searchInputTitle.value.toLowerCase();
-        data = originalData.filter((row, index) => index !== 0 && row.some((cell, cellIndex) => cellIndex !== 0 && cell.toLowerCase().includes(searchTermTitle)));
+        data = originalData.filter((row, index) => index === 0 || row[2].toLowerCase().includes(searchTermTitle)); // Assuming Title is in the third column
         applyFilters();
     });
 
     // Search functionality for author on input
     searchInputAuthor.addEventListener('input', () => {
         const searchTermAuthor = searchInputAuthor.value.toLowerCase();
-        data = originalData.filter((row, index) => index !== 0 && row.some((cell, cellIndex) => cellIndex !== 0 && cell.toLowerCase().includes(searchTermAuthor)));
+        data = originalData.filter((row, index) => index === 0 || row[3].toLowerCase().includes(searchTermAuthor)); // Assuming Author is in the fourth column
         applyFilters();
     });
+
 
     //*********build the filter********** */
     // Build and populate the subjects filter
     const subjectsSet = new Set();
     originalData.slice(1).forEach(row => {
-        const subjects = row[3].split(',').map(subject => subject.trim());
+        const subjects = row[4].split(',').map(subject => subject.trim());
         subjects.forEach(subject => subjectsSet.add(subject));
     });
     subjectsSet.forEach(subject => {
@@ -76,7 +77,7 @@ async function renderTable() {
     // Build and populate the status filter
     const statusSet = new Set();
     originalData.slice(1).forEach(row => {
-        statusSet.add(row[4]);
+        statusSet.add(row[5]);
     });
     statusSet.forEach(status => {
         const option = document.createElement('option');
@@ -103,11 +104,12 @@ async function renderTable() {
         filterDataAndApply(selectedStatus, selectedSubject);
     });
 
-    // Function to filter data based on subject or status
+    // Function to filter data based on subject, status, and additional filter
+    // Function to filter data based on subject, status, and additional filter
     function filterDataAndApply(selectedStatus, selectedSubject) {
-        data = originalData.slice(1).filter(row => {
-            const status = row[4].toLowerCase(); // Assuming status is in the fifth column
-            const subject = row[3].toLowerCase(); // Assuming subject is in the fourth column
+        data = originalData.filter(row => {
+            const status = row[5].toLowerCase(); // Assuming status is in the sixth column
+            const subject = row[4].toLowerCase(); // Assuming subject is in the fifth column
 
             const statusMatch = selectedStatus === '' || status === selectedStatus.toLowerCase();
             const subjectMatch = selectedSubject === '' || subject.includes(selectedSubject);
@@ -120,25 +122,48 @@ async function renderTable() {
 
     // *******************************
 
+
     // Function to apply filters and render the table
     function applyFilters() {
-        // // Clear existing rows
+        // Clear existing rows
+        const dataTable = document.getElementById('data-table');
         while (dataTable.rows.length > 1) {
             dataTable.deleteRow(1);
         }
 
-        // Build new rows based on filtered data
-        for (let i = 0; i < data.length; i++) {
+        // Build new rows based on filtered data, starting from index 1 to skip the header row
+        for (let i = 1; i < data.length; i++) {
             const row = document.createElement('tr');
-            data[i].forEach(value => {
+
+            // Render the first column (ID column)
+            const idCell = document.createElement('td');
+            idCell.textContent = data[i][0]; // Assuming ID is in the first column
+            row.appendChild(idCell);
+
+            // Assuming the image URL is in the second column (index 1)
+            const imgCell = document.createElement('td');
+            const img = document.createElement('img');
+            img.src = data[i][1]; // Assuming image URL is in the second column
+            img.alt = 'Book Cover';
+            img.style.maxWidth = '100px'; // Adjust the width as needed
+            imgCell.appendChild(img);
+            row.appendChild(imgCell);
+
+            // Render other columns, starting from the third column (index 2)
+            for (let j = 2; j < data[i].length; j++) {
                 const td = document.createElement('td');
-                td.textContent = value;
+                td.textContent = data[i][j];
                 row.appendChild(td);
-            });
+            }
+
             dataTable.appendChild(row);
         }
     }
 
+
+
+    // Add this line to call the function initially
+    applyFilters();
 
 }
 
